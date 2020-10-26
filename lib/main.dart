@@ -1,4 +1,8 @@
 import "package:flutter/material.dart";
+import 'package:routerApp/flutter_layout_page.dart';
+import 'package:routerApp/less_group_page.dart';
+import 'package:routerApp/plugin_use.dart';
+import 'package:routerApp/statefull_group_page.dart';
 void main()=>runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -36,10 +40,10 @@ class _RouteNavigatorState extends State<RouteNavigator> {
     return Container(
       child: Column(
         children: <Widget>[
-          SwitchListTitle(
+          SwitchListTile(
             title: Text("${byName?'':'不'}通过路由名跳转"),
             value: byName,
-            onChange: (value){
+            onChanged: (value){
               setState((){
                 byName=value;
               });
@@ -62,7 +66,8 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           } else {
             Navigator.push(context, MaterialPageRoute(builder: (context)=>page));
           }
-        }
+        },
+        child: Text(title),
       )
     );
   }

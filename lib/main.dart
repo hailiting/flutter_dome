@@ -1,8 +1,23 @@
 import "package:flutter/material.dart";
+// flutter 布局基础
 import 'package:routerApp/flutter_layout_page.dart';
+// stateless 组件基础
 import 'package:routerApp/less_group_page.dart';
+// Stateful 组件基础
+import 'package:routerApp/stateful_group_page.dart';
+// 插件应用
 import 'package:routerApp/plugin_use.dart';
-import 'package:routerApp/statefull_group_page.dart';
+// flutter 手势事件
+import 'package:routerApp/gesture_page.dart';
+// 借助插件，打开第三方
+import "package:routerApp/launch_page.dart";
+// 拍照，获取照片 dome
+import "package:routerApp/photo_app_page.dart";
+// 如何导入和使用Flutter资源文件 【iconfont等】
+import "package:routerApp/res_page.dart";
+
+
+
 void main()=>runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -24,6 +39,10 @@ class MyApp extends StatelessWidget {
         "less": (BuildContext context)=> LessGroupPage(),
         "ful": (BuildContext context)=> StatefulGroup(),
         "layout": (BuildContext context)=>FlutterLayoutPage(),
+        "gesture": (BuildContext context)=>GesturePage(),
+        "launch": (BuildContext context)=>LaunchPage(),
+        "photo": (BuildContext context)=>PhotoAppage(),
+        "res": (BuildContext context)=>ResPage(),
       }
     );
   }
@@ -53,6 +72,10 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           _item("StatelessWidget与基础组件", LessGroupPage(), "less"),
           _item("StatefulWidget与基础组件", StatefulGroup(), "ful"),
           _item("如何进行Flutter布局开发", FlutterLayoutPage(), "layout"),
+          _item("手势事件学习", GesturePage(), "layout"),
+          _item("打开第三方页面 or app", LaunchPage(), "layout"),
+          _item("加载外部资源", ResPage(), "layout"),
+          _item("照相机小dome", PhotoAppage(), "layout"),
         ]
       )
     );

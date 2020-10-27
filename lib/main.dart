@@ -1,3 +1,4 @@
+
 import "package:flutter/material.dart";
 // flutter 布局基础
 import 'package:routerApp/flutter_layout_page.dart';
@@ -13,26 +14,60 @@ import 'package:routerApp/gesture_page.dart';
 import "package:routerApp/launch_page.dart";
 // 拍照，获取照片 dome
 import "package:routerApp/photo_app_page.dart";
-// 如何导入和使用Flutter资源文件 【iconfont等】
+// 如何导入和使用Flutter资源文件 img
 import "package:routerApp/res_page.dart";
+// Widget 生命周期
+import "package:routerApp/app_lifecycle_page.dart";
+// App 生命周期
+import "package:routerApp/widget_lifecycle_page.dart";
 
 
-
-void main()=>runApp(MyApp());
-
-class MyApp extends StatelessWidget {
+void main()=>runApp(Myapp());
+class Myapp extends StatefulWidget{
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+class _MyAppState extends State<Myapp> {
+  static const IconData trade =IconData(0xe6d6, fontFamily: "icontfont");
+  Brightness _brightness = Brightness.light;
   @override
   Widget build(BuildContext context){
     return MaterialApp(
       title: "Flutter Dome",
       theme: ThemeData(
+        // 全局设置字体
+        // fontFamily: "icontfont",
+        // 主题控制
+        brightness: _brightness,
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
           title: Text("如何创建Flutter的路由与导航"),
+          leading: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: Icon(trade, color: Colors.orange),
+          ),
         ),
-        body: RouteNavigator(),
+        body: Column(
+          children: <Widget>[
+            RaisedButton(
+              onPressed: (){
+                setState((){
+                  if(_brightness == Brightness.dark){
+                    _brightness=Brightness.light;
+                  }else{
+                    _brightness=Brightness.dark;
+                  }
+                });
+              },
+              child: Text("切换主题"),
+            ),
+            RouteNavigator(),
+          ],
+        )
       ),
       routes: <String, WidgetBuilder>{
         "plugin": (BuildContext context)=> PluginUse(),
@@ -43,6 +78,8 @@ class MyApp extends StatelessWidget {
         "launch": (BuildContext context)=>LaunchPage(),
         "photo": (BuildContext context)=>PhotoAppage(),
         "res": (BuildContext context)=>ResPage(),
+        "app_lifecycle": (BuildContext context)=>AppLifecycle(),
+        "widget_lifecycle": (BuildContext context)=>WidgetLifecycle(),
       }
     );
   }
@@ -72,10 +109,12 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           _item("StatelessWidget与基础组件", LessGroupPage(), "less"),
           _item("StatefulWidget与基础组件", StatefulGroup(), "ful"),
           _item("如何进行Flutter布局开发", FlutterLayoutPage(), "layout"),
-          _item("手势事件学习", GesturePage(), "layout"),
-          _item("打开第三方页面 or app", LaunchPage(), "layout"),
-          _item("加载外部资源", ResPage(), "layout"),
-          _item("照相机小dome", PhotoAppage(), "layout"),
+          _item("手势事件学习", GesturePage(), "gesture"),
+          _item("打开第三方页面 or app", LaunchPage(), "launch"),
+          _item("加载外部资源", ResPage(), "res"),
+          _item("Widget生命周期", WidgetLifecycle(), "widget_lifecycle"),
+          _item("App生命周期", AppLifecycle(), "app_lifecycle"),
+          _item("照相机小dome", PhotoAppage(), "photo"),
         ]
       )
     );

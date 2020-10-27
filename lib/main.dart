@@ -76,7 +76,7 @@ class _MyAppState extends State<Myapp> {
         "layout": (BuildContext context)=>FlutterLayoutPage(),
         "gesture": (BuildContext context)=>GesturePage(),
         "launch": (BuildContext context)=>LaunchPage(),
-        "photo": (BuildContext context)=>PhotoAppage(),
+        "photo": (BuildContext context)=>PhotoApp(),
         "res": (BuildContext context)=>ResPage(),
         "app_lifecycle": (BuildContext context)=>AppLifecycle(),
         "widget_lifecycle": (BuildContext context)=>WidgetLifecycle(),
@@ -114,7 +114,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           _item("加载外部资源", ResPage(), "res"),
           _item("Widget生命周期", WidgetLifecycle(), "widget_lifecycle"),
           _item("App生命周期", AppLifecycle(), "app_lifecycle"),
-          _item("照相机小dome", PhotoAppage(), "photo"),
+          _item("照相机小dome", PhotoApp(), "photo"),
         ]
       )
     );

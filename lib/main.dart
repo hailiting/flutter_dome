@@ -20,7 +20,8 @@ import "package:routerApp/res_page.dart";
 import "package:routerApp/app_lifecycle_page.dart";
 // App 生命周期
 import "package:routerApp/widget_lifecycle_page.dart";
-
+// 动画学习
+import "package:routerApp/animation_page.dart";
 
 void main()=>runApp(Myapp());
 class Myapp extends StatefulWidget{
@@ -80,7 +81,8 @@ class _MyAppState extends State<Myapp> {
         "res": (BuildContext context)=>ResPage(),
         "app_lifecycle": (BuildContext context)=>AppLifecycle(),
         "widget_lifecycle": (BuildContext context)=>WidgetLifecycle(),
-      }
+        "animation": (BuildContext context)=> AnimationPage(),
+      },
     );
   }
 }
@@ -94,7 +96,10 @@ class _RouteNavigatorState extends State<RouteNavigator> {
   @override
   Widget build(BuildContext context){
     return Container(
-      child: Column(
+      padding: EdgeInsets.all(20),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 12,
         children: <Widget>[
           SwitchListTile(
             title: Text("${byName?'':'不'}通过路由名跳转"),
@@ -115,6 +120,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           _item("Widget生命周期", WidgetLifecycle(), "widget_lifecycle"),
           _item("App生命周期", AppLifecycle(), "app_lifecycle"),
           _item("照相机小dome", PhotoApp(), "photo"),
+          _item("动画学习", AnimationPage(), "animation"),
         ]
       )
     );

@@ -1,4 +1,3 @@
-
 import "package:flutter/material.dart";
 // flutter 布局基础
 import 'package:routerApp/flutter_layout_page.dart';
@@ -22,17 +21,21 @@ import "package:routerApp/app_lifecycle_page.dart";
 import "package:routerApp/widget_lifecycle_page.dart";
 // 动画学习
 import "package:routerApp/animation_page.dart";
+// hero动画学习
+import "package:routerApp/heroAnimationPage.dart";
 
-void main()=>runApp(Myapp());
-class Myapp extends StatefulWidget{
+void main() => runApp(Myapp());
+
+class Myapp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
+
 class _MyAppState extends State<Myapp> {
-  static const IconData trade =IconData(0xe6d6, fontFamily: "icontfont");
+  static const IconData trade = IconData(0xe6d6, fontFamily: "icontfont");
   Brightness _brightness = Brightness.light;
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: "Flutter Dome",
       theme: ThemeData(
@@ -43,73 +46,71 @@ class _MyAppState extends State<Myapp> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("如何创建Flutter的路由与导航"),
-          leading: GestureDetector(
-            onTap: (){
-              Navigator.pop(context);
-            },
-            child: Icon(trade, color: Colors.orange),
-          ),
-        ),
-        body: Column(
-          children: <Widget>[
-            RaisedButton(
-              onPressed: (){
-                setState((){
-                  if(_brightness == Brightness.dark){
-                    _brightness=Brightness.light;
-                  }else{
-                    _brightness=Brightness.dark;
-                  }
-                });
+          appBar: AppBar(
+            title: Text("如何创建Flutter的路由与导航"),
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
               },
-              child: Text("切换主题"),
+              child: Icon(trade, color: Colors.orange),
             ),
-            RouteNavigator(),
-          ],
-        )
-      ),
+          ),
+          body: SingleChildScrollView(
+              child: Column(
+              children: <Widget>[
+                RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      if (_brightness == Brightness.dark) {
+                        _brightness = Brightness.light;
+                      } else {
+                        _brightness = Brightness.dark;
+                      }
+                    });
+                  },
+                  child: Text("切换主题"),
+                ),
+                RouteNavigator(),
+            ],
+          ))),
       routes: <String, WidgetBuilder>{
-        "plugin": (BuildContext context)=> PluginUse(),
-        "less": (BuildContext context)=> LessGroupPage(),
-        "ful": (BuildContext context)=> StatefulGroup(),
-        "layout": (BuildContext context)=>FlutterLayoutPage(),
-        "gesture": (BuildContext context)=>GesturePage(),
-        "launch": (BuildContext context)=>LaunchPage(),
-        "photo": (BuildContext context)=>PhotoApp(),
-        "res": (BuildContext context)=>ResPage(),
-        "app_lifecycle": (BuildContext context)=>AppLifecycle(),
-        "widget_lifecycle": (BuildContext context)=>WidgetLifecycle(),
-        "animation": (BuildContext context)=> AnimationPage(),
+        "plugin": (BuildContext context) => PluginUse(),
+        "less": (BuildContext context) => LessGroupPage(),
+        "ful": (BuildContext context) => StatefulGroup(),
+        "layout": (BuildContext context) => FlutterLayoutPage(),
+        "gesture": (BuildContext context) => GesturePage(),
+        "launch": (BuildContext context) => LaunchPage(),
+        "photo": (BuildContext context) => PhotoApp(),
+        "res": (BuildContext context) => ResPage(),
+        "app_lifecycle": (BuildContext context) => AppLifecycle(),
+        "widget_lifecycle": (BuildContext context) => WidgetLifecycle(),
+        "animation": (BuildContext context) => AnimationPage(),
+        "heroAnimation": (BuildContext context) => HeroAnimationPage(),
       },
     );
   }
 }
+
 class RouteNavigator extends StatefulWidget {
   @override
-  _RouteNavigatorState createState()=>_RouteNavigatorState();
+  _RouteNavigatorState createState() => _RouteNavigatorState();
 }
 
 class _RouteNavigatorState extends State<RouteNavigator> {
   bool byName = false;
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
-      child: Wrap(
-        spacing: 8,
-        runSpacing: 12,
-        children: <Widget>[
+        padding: EdgeInsets.all(20),
+        child: Wrap(spacing: 8, runSpacing: 12, children: <Widget>[
           SwitchListTile(
-            title: Text("${byName?'':'不'}通过路由名跳转"),
-            value: byName,
-            onChanged: (value){
-              setState((){
-                byName=value;
-              });
-            }
-          ),
+              title: Text("${byName ? '' : '不'}通过路由名跳转"),
+              value: byName,
+              onChanged: (value) {
+                setState(() {
+                  byName = value;
+                });
+              }),
           _item("如何使用Flutter包和插件", PluginUse(), "plugin"),
           _item("StatelessWidget与基础组件", LessGroupPage(), "less"),
           _item("StatefulWidget与基础组件", StatefulGroup(), "ful"),
@@ -121,22 +122,22 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           _item("App生命周期", AppLifecycle(), "app_lifecycle"),
           _item("照相机小dome", PhotoApp(), "photo"),
           _item("动画学习", AnimationPage(), "animation"),
-        ]
-      )
-    );
+          _item("hero动画", HeroAnimationPage(), "heroAnimation"),
+        ]));
   }
-  Widget _item(String title, page, String routeName){
+
+  Widget _item(String title, page, String routeName) {
     return Container(
-      child: RaisedButton(
-        onPressed: (){
-          if(byName){
-            Navigator.pushNamed(context, routeName);
-          } else {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>page));
-          }
-        },
-        child: Text(title),
-      )
-    );
+        child: RaisedButton(
+      onPressed: () {
+        if (byName) {
+          Navigator.pushNamed(context, routeName);
+        } else {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => page));
+        }
+      },
+      child: Text(title),
+    ));
   }
 }

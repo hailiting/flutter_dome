@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:routerApp/dome01/dome01Main.dart';
 // flutter 布局基础
 import 'package:routerApp/flutter_layout_page.dart';
 // stateless 组件基础
@@ -23,15 +24,16 @@ import "package:routerApp/widget_lifecycle_page.dart";
 import "package:routerApp/animation_page.dart";
 // hero动画学习
 import "package:routerApp/heroAnimationPage.dart";
+// 初步建立框架 使用Scaffold实现导航框架
 
-void main() => runApp(Myapp());
+void main() => runApp(MyApp());
 
-class Myapp extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<Myapp> {
+class _MyAppState extends State<MyApp> {
   static const IconData trade = IconData(0xe6d6, fontFamily: "icontfont");
   Brightness _brightness = Brightness.light;
   @override
@@ -57,20 +59,20 @@ class _MyAppState extends State<Myapp> {
           ),
           body: SingleChildScrollView(
               child: Column(
-              children: <Widget>[
-                RaisedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (_brightness == Brightness.dark) {
-                        _brightness = Brightness.light;
-                      } else {
-                        _brightness = Brightness.dark;
-                      }
-                    });
-                  },
-                  child: Text("切换主题"),
-                ),
-                RouteNavigator(),
+            children: <Widget>[
+              RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    if (_brightness == Brightness.dark) {
+                      _brightness = Brightness.light;
+                    } else {
+                      _brightness = Brightness.dark;
+                    }
+                  });
+                },
+                child: Text("切换主题"),
+              ),
+              RouteNavigator(),
             ],
           ))),
       routes: <String, WidgetBuilder>{
@@ -86,6 +88,7 @@ class _MyAppState extends State<Myapp> {
         "widget_lifecycle": (BuildContext context) => WidgetLifecycle(),
         "animation": (BuildContext context) => AnimationPage(),
         "heroAnimation": (BuildContext context) => HeroAnimationPage(),
+        "dome01": (BuildContext context) => DomeMain(),
       },
     );
   }
@@ -109,6 +112,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
               onChanged: (value) {
                 setState(() {
                   byName = value;
+                  byName = value;
                 });
               }),
           _item("如何使用Flutter包和插件", PluginUse(), "plugin"),
@@ -123,6 +127,8 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           _item("照相机小dome", PhotoApp(), "photo"),
           _item("动画学习", AnimationPage(), "animation"),
           _item("hero动画", HeroAnimationPage(), "heroAnimation"),
+          _item("dome01", DomeMain(), "dome01"),
+
         ]));
   }
 

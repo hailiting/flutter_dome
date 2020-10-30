@@ -30,7 +30,7 @@ class _FlutterLayoutPageState extends State<FlutterLayoutPage> {
             currentIndex: _currentIndex,
             onTap: (index) {
               setState(() {
-                _currentIndex:  index;
+                _currentIndex = index;
               });
             },
             items: [
@@ -63,122 +63,122 @@ class _FlutterLayoutPageState extends State<FlutterLayoutPage> {
         ),
         body: _currentIndex == 0
             ? RefreshIndicator(
-            child: ListView(
-              children: <Widget>[
-                Container(
-                    decoration: BoxDecoration(color: Colors.white),
-                    alignment: Alignment.center,
-                    child: Column(children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          ClipOval(
-                            child: SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Image.network(
-                                  "http://www.devio.org/img/avatar.png"),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: ClipRRect(
-                              //圆角
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10)),
-                              child: Opacity(
-                                opacity: 0.6,
-                                child: Image.network(
-                                  "http://www.devio.org/img/avatar.png",
+                child: ListView(
+                  children: <Widget>[
+                    Container(
+                        decoration: BoxDecoration(color: Colors.white),
+                        alignment: Alignment.center,
+                        child: Column(children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              ClipOval(
+                                child: SizedBox(
                                   width: 100,
                                   height: 100,
+                                  child: Image.network(
+                                      "http://www.devio.org/img/avatar.png"),
                                 ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: ClipRRect(
+                                  //圆角
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  child: Opacity(
+                                    opacity: 0.6,
+                                    child: Image.network(
+                                      "http://www.devio.org/img/avatar.png",
+                                      width: 100,
+                                      height: 100,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextField(
+                              // 输入文本样式
+                              decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                  hintText: "请输入",
+                                  hintStyle: TextStyle(
+                                    fontSize: 15,
+                                  ))),
+                          Container(
+                            height: 100,
+                            margin: EdgeInsets.all(10),
+                            child: PhysicalModel(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(6),
+                              clipBehavior: Clip.antiAlias,
+                              child: PageView(
+                                children: <Widget>[
+                                  _item("page1", Colors.deepPurple),
+                                  _item("page2", Colors.green),
+                                  _item("page3", Colors.blue),
+                                ],
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      TextField(
-                        // 输入文本样式
-                          decoration: InputDecoration(
-                              contentPadding:
-                              EdgeInsets.fromLTRB(5, 0, 0, 0),
-                              hintText: "请输入",
-                              hintStyle: TextStyle(
-                                fontSize: 15,
-                              ))),
-                      Container(
-                        height: 100,
-                        margin: EdgeInsets.all(10),
-                        child: PhysicalModel(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(6),
-                          clipBehavior: Clip.antiAlias,
-                          child: PageView(
+                          Column(
                             children: <Widget>[
-                              _item("page1", Colors.deepPurple),
-                              _item("page2", Colors.green),
-                              _item("page3", Colors.blue),
+                              FractionallySizedBox(
+                                  widthFactor: 1,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.greenAccent),
+                                    child: Text("宽度撑满"),
+                                  ))
                             ],
-                          ),
-                        ),
-                      ),
-                      Column(
-                        children: <Widget>[
-                          FractionallySizedBox(
-                              widthFactor: 1,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.greenAccent),
-                                child: Text("宽度撑满"),
-                              ))
-                        ],
-                      )
-                    ])),
-                Stack(
-                  children: <Widget>[
-                    Image.network(
-                      "http://www.devio.org/img/avatar.png",
-                      width: 100,
-                      height: 100,
-                    ),
-                    Positioned(
-                        left: 0,
-                        bottom: 0,
-                        child: Image.network(
+                          )
+                        ])),
+                    Stack(
+                      children: <Widget>[
+                        Image.network(
                           "http://www.devio.org/img/avatar.png",
-                          width: 36,
-                          height: 36,
-                        ))
+                          width: 100,
+                          height: 100,
+                        ),
+                        Positioned(
+                            left: 0,
+                            bottom: 0,
+                            child: Image.network(
+                              "http://www.devio.org/img/avatar.png",
+                              width: 36,
+                              height: 36,
+                            ))
+                      ],
+                    ),
+                    Wrap(
+                      // wrap布局，从左到右进行排列，会自动换行
+                      spacing: 8,
+                      runSpacing: 6,
+                      children: <Widget>[
+                        _chip("Flutter"),
+                        _chip("进阶"),
+                        _chip("实战"),
+                        _chip("携程"),
+                        _chip("app"),
+                      ],
+                    )
                   ],
                 ),
-                Wrap(
-                  // wrap布局，从左到右进行排列，会自动换行
-                  spacing: 8,
-                  runSpacing: 6,
-                  children: <Widget>[
-                    _chip("Flutter"),
-                    _chip("进阶"),
-                    _chip("实战"),
-                    _chip("携程"),
-                    _chip("app"),
-                  ],
-                )
-              ],
-            ),
-            onRefresh: _handleRefresh)
+                onRefresh: _handleRefresh)
             : Column(
-          children: <Widget>[
-            Text("列表"),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                ),
-                child: Text("拉伸填满"),
+                children: <Widget>[
+                  Text("列表"),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                      ),
+                      child: Text("拉伸填满"),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
       ),
     );
   }

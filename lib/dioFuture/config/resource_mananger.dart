@@ -1,0 +1,54 @@
+import 'dart:math';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+class ImageHelper {
+  static const String baseUrl = "http://www.meetingplus.cn";
+  static const String imagePrefix = '$baseUrl/uimg/';
+  static String wrapUrl(String url) {
+    if (url.startsWith("http")) {
+      return url;
+    }
+    return imagePrefix + url;
+  }
+
+  static String wrapAssets(String url, {String format: "png"}) {
+    return "assets/images" + url + ".$format";
+  }
+
+  static Widget placeHolder({double width, double height}) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: CupertinoActivityIndicator(
+        radius: min(10.0, width / 3),
+      ),
+    );
+  }
+
+  static Widget error({double width, double height, double size}) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: Icon(
+        Icons.panorama,
+        size: size,
+      ),
+    );
+  }
+
+  static String randomUrl(
+      {int width = 100, int height = 100, Object key = ""}) {
+    return 'http://placeimg.com/$width/$height/${key.hashCode.toString() + key.toString()}';
+  }
+}
+
+class Iconfonts {
+  Iconfonts._();
+  static const String fontFamily = "iconfont";
+  static const IconData pageEmpty = IconData(0xe63c, fontFamily: fontFamily);
+  static const IconData pageError = IconData(0xe600, fontFamily: fontFamily);
+  static const IconData pageNetworkError = IconData(0xe679, fontFamily: fontFamily);
+  static const IconData pageUnAuth = IconData(0xe65f, fontFamily: fontFamily);
+}

@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
-import 'package:routerApp/dome01/dome01Main.dart';
+import "package:oktoast/oktoast.dart";
+
+import 'package:routerApp/dioFuture/dioFutureBuildPage.dart';
 // flutter 布局基础
 import 'package:routerApp/flutter_layout_page.dart';
 // stateless 组件基础
@@ -24,7 +26,10 @@ import "package:routerApp/widget_lifecycle_page.dart";
 import "package:routerApp/animation_page.dart";
 // hero动画学习
 import "package:routerApp/heroAnimationPage.dart";
+// http请求
+import 'package:routerApp/httpDomePage.dart';
 // 初步建立框架 使用Scaffold实现导航框架
+import 'package:routerApp/dome01/dome01Main.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,59 +43,68 @@ class _MyAppState extends State<MyApp> {
   Brightness _brightness = Brightness.light;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Flutter Dome",
-      theme: ThemeData(
-        // 全局设置字体
-        // fontFamily: "icontfont",
-        // 主题控制
-        brightness: _brightness,
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text("如何创建Flutter的路由与导航"),
-            leading: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Icon(trade, color: Colors.orange),
-            ),
+    return OKToast(
+        textStyle: TextStyle(fontSize: 19.0, color: Colors.yellow),
+        backgroundColor: Colors.grey,
+        radius: 10.0,
+        animationCurve: Curves.easeIn,
+        animationBuilder: Miui10AnimBuilder(),
+        animationDuration: Duration(milliseconds: 200),
+        duration: Duration(seconds: 3),
+        child: MaterialApp(
+          title: "Flutter Dome",
+          theme: ThemeData(
+            // 全局设置字体
+            // fontFamily: "icontfont",
+            // 主题控制
+            brightness: _brightness,
+            primarySwatch: Colors.blue,
           ),
-          body: SingleChildScrollView(
-              child: Column(
-            children: <Widget>[
-              RaisedButton(
-                onPressed: () {
-                  setState(() {
-                    if (_brightness == Brightness.dark) {
-                      _brightness = Brightness.light;
-                    } else {
-                      _brightness = Brightness.dark;
-                    }
-                  });
-                },
-                child: Text("切换主题"),
+          home: Scaffold(
+              appBar: AppBar(
+                title: Text("如何创建Flutter的路由与导航"),
+                leading: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(trade, color: Colors.orange),
+                ),
               ),
-              RouteNavigator(),
-            ],
-          ))),
-      routes: <String, WidgetBuilder>{
-        "plugin": (BuildContext context) => PluginUse(),
-        "less": (BuildContext context) => LessGroupPage(),
-        "ful": (BuildContext context) => StatefulGroup(),
-        "layout": (BuildContext context) => FlutterLayoutPage(),
-        "gesture": (BuildContext context) => GesturePage(),
-        "launch": (BuildContext context) => LaunchPage(),
-        "photo": (BuildContext context) => PhotoApp(),
-        "res": (BuildContext context) => ResPage(),
-        "app_lifecycle": (BuildContext context) => AppLifecycle(),
-        "widget_lifecycle": (BuildContext context) => WidgetLifecycle(),
-        "animation": (BuildContext context) => AnimationPage(),
-        "heroAnimation": (BuildContext context) => HeroAnimationPage(),
-        "dome01": (BuildContext context) => DomeMain(),
-      },
-    );
+              body: SingleChildScrollView(
+                  child: Column(
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      setState(() {
+                        if (_brightness == Brightness.dark) {
+                          _brightness = Brightness.light;
+                        } else {
+                          _brightness = Brightness.dark;
+                        }
+                      });
+                    },
+                    child: Text("切换主题"),
+                  ),
+                  RouteNavigator(),
+                ],
+              ))),
+          routes: <String, WidgetBuilder>{
+            "plugin": (BuildContext context) => PluginUse(),
+            "less": (BuildContext context) => LessGroupPage(),
+            "ful": (BuildContext context) => StatefulGroup(),
+            "layout": (BuildContext context) => FlutterLayoutPage(),
+            "gesture": (BuildContext context) => GesturePage(),
+            "launch": (BuildContext context) => LaunchPage(),
+            "photo": (BuildContext context) => PhotoApp(),
+            "res": (BuildContext context) => ResPage(),
+            "app_lifecycle": (BuildContext context) => AppLifecycle(),
+            "widget_lifecycle": (BuildContext context) => WidgetLifecycle(),
+            "animation": (BuildContext context) => AnimationPage(),
+            "heroAnimation": (BuildContext context) => HeroAnimationPage(),
+            "httpDome": (BuildContext context) => HttpDomePage(),
+            "dome01": (BuildContext context) => DomeMain(),
+          },
+        ));
   }
 }
 
@@ -127,8 +141,9 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           _item("照相机小dome", PhotoApp(), "photo"),
           _item("动画学习", AnimationPage(), "animation"),
           _item("hero动画", HeroAnimationPage(), "heroAnimation"),
+          _item("Http请求dome", HttpDomePage(), "httpDome"),
+          _item("dio请求dome，用FutureBuilder", DioFutureBuildPage(), "dome01"),
           _item("dome01", DomeMain(), "dome01"),
-
         ]));
   }
 

@@ -21,6 +21,12 @@ class _TabNavigatorState extends State<TabNavigator> {
     return Scaffold(
         body: PageView(
           controller: _controller,
+          onPageChanged: (index){
+            print("PageView: $index");
+            setState(() {
+              _currentIndex= index;
+            });
+          },
           children: [
             HomePage(),
             SearchPage(),
@@ -36,6 +42,7 @@ class _TabNavigatorState extends State<TabNavigator> {
               _currentIndex= index;
             });
           },
+          type: BottomNavigationBarType.fixed,
           items: [
             _renderNavigationBarItem(Icons.home, "home"),
             _renderNavigationBarItem(Icons.search, "search"),

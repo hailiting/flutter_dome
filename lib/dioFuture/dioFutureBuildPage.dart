@@ -22,9 +22,7 @@ import 'package:routerApp/dioFuture/config/provider_manager.dart';
 import 'package:routerApp/dioFuture/view_model/local_model.dart';
 import 'package:routerApp/dioFuture/view_model/theme_model.dart';
 
-
 import 'package:routerApp/generated/l10n.dart';
-
 
 const providers = [
   ...independentServices,
@@ -37,24 +35,28 @@ class DioFutureBuildPage extends StatefulWidget {
 }
 
 class _DioFutureBuildPageState extends State<DioFutureBuildPage> {
+  void _init() {
+    final router = new FluroRouter();
+    Routes.configureRoutes(router);
+    Application.router = router;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: providers,
-    child:
-      Scaffold(
-      appBar: AppBar(
-        title: Text("dio demo"),
-        leading: BackButton(),
-      ),
-      body: Center(
-        child: RaisedButton(
-          child: Text('click me'),
-          onPressed: (){
-
-          },
-        ),
-      ),
-    )
-      );
+    _init();
+    return MultiProvider(
+        providers: providers,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("dio demo"),
+            leading: BackButton(),
+          ),
+          body: Center(
+            child: RaisedButton(
+              child: Text('click me'),
+              onPressed: () {},
+            ),
+          ),
+        ));
   }
 }

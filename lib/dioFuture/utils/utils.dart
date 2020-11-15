@@ -96,7 +96,9 @@ class Utils {
   static bool isEmptyList(List list) {
     return ObjectUtil.isEmptyList(list);
   }
-
+  static bool isEmptyMap(Map map){
+    return ObjectUtil.isEmptyMap(map);
+  }
   static bool isEmpty(Object object) {
     return ObjectUtil.isEmpty(object);
   }
